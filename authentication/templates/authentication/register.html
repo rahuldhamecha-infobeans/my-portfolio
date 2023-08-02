@@ -41,6 +41,18 @@
                         <div class="card-body">
                               {% csrf_token %}
 
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <label for="username">First Name <span class="link-danger">*</span> </label>
+                                    {% render_field user_form.first_name class="form-control" placeholder="First Name" required=True autocomplete="off" %}
+                                </div>
+
+                                <div class="col-md-6 form-group mt-3 mt-md-0">
+                                    <label for="username">Last Name <span class="link-danger">*</span> </label>
+                                   {% render_field user_form.last_name class="form-control" placeholder="Last Name" required=True autocomplete="off" %}
+                                </div>
+                              </div>
+
                               <div class="row">
                                 <div class="col-md-6 form-group">
                                     <label for="username">Username <span class="link-danger">*</span> </label>

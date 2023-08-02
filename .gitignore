@@ -161,3 +161,4 @@ cython_debug/
 
 my_portfolio/env.py
 .idea/
+media/
