@@ -3182,3 +3182,16 @@ section {
   border:1px solid var(--color-primary);
   background: var(--color-white);
 }
+
+header#header {
+    background: #fff !important;
+}
+
+.contact .php-email-form input[type=password],
+.contact .php-email-form input[type=text],
+.contact .php-email-form input[type=email],
+.contact .php-email-form input[type=url] {
+    height: 48px;
+    padding: 10px 15px;
+  border-radius: 5px;
+}

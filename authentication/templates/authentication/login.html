@@ -1,0 +1,61 @@
+<!doctype html>
+{% extends 'layouts/index.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block page_title %} Login {% endblock %}
+
+{% block body_block %}
+     <div class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Login</h2>
+          <ol>
+            <li><a href="{% url 'portfolio:index' %}">Home</a></li>
+            <li>Login</li>
+          </ol>
+        </div>
+
+      </div>
+    </div><!-- End Breadcrumbs -->
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-6">
+                    {% if is_error %}
+                        {{ errors }}
+                    {% endif %}
+                    <div class="card php-email-form">
+                        <div class="card-header bg-primary">
+                            <h2 class="text-center text-white">Login Here</h2>
+                        </div>
+                        <form method="POST"  action="{% url 'auth:login' %}">
+                        <div class="card-body">
+                              {% csrf_token %}
+                              <div class="row">
+                                <div class="col-md-12 form-group m-2">
+                                    <label for="username">Username <span class="link-danger">*</span> </label>
+                                    {% render_field login_form.username class="form-control" placeholder="UserName" autocomplete="off" %}
+                                </div>
+
+                                <div class="col-md-12 form-group m-2">
+                                    <label for="username">Password <span class="link-danger">*</span> </label>
+                                   {% render_field login_form.password class="form-control" placeholder="Password" autocomplete="off" %}
+                                </div>
+                              </div>
+                        </div>
+                            <div class="card-footer">
+                                <div class="text-center">
+                                    <button class="btn-getstarted bordered" type="submit">Login</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
