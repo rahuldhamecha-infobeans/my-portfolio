@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>{% block page_title %}{% endblock %} | Rahul Dhamecha</title>
+
+    {#  Include Styles and Inject custom style page wise block  #}
+    {% include 'layouts/styles.html' %}
+    {% block body_styles %}
+    {% endblock %}
+
+</head>
+
+<body>
+  <!-- ======= Header ======= -->
+  {% include 'layouts/header.html' %}
+
+  <main id="main">
+      {% block body_block %}
+      {% endblock %}
+  </main><!-- End #main -->
+
+  {% include 'layouts/footer.html' %}
+
+  {% include 'layouts/scripts.html' %}
+  {% block body_scripts %}
+  {% endblock %}
+
+</body>
+
+</html>
