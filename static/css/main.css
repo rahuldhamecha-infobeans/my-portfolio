@@ -3229,4 +3229,17 @@ span.page_item.next_prev {
     padding: 5px 8px;
 }
 
+.btn.btn-primary{
+  background-color: var(--color-primary);
+  border:1px solid var(--color-primary);
+  color:var(--color-white);
+}
 
+ul.errorlist {
+    list-style: none;
+    background: #ff000050;
+    color: #701919;
+    padding: 10px;
+    font-weight: 400;
+    border-radius: 5px;
+}

@@ -12,10 +12,9 @@
       <nav id="navbar" class="navbar">
         <ul>
          <li><a class="nav-link scrollto {{ request.path | is_active_item:'home' }}" href="{% url 'portfolio:index' %}">Home</a></li>
-          <li><a class="nav-link scrollto {{ request.path | is_active_item:'about' }}" href="#">About</a></li>
+          <li><a class="nav-link scrollto {{ request.path | is_active_item:'about' }}" href="{% url 'portfolio:about' %}">About</a></li>
           <li><a class="nav-link scrollto {{ request.path | is_active_item:'services' }}" href="{% url 'portfolio:services' %}">Services</a></li>
           <li><a class="nav-link scrollto {{ request.path | is_active_item:'portfolio' }}" href="#">Portfolio</a></li>
-          <li><a class="nav-link scrollto {{ request.path | is_active_item:'team' }}" href="#">Team</a></li>
           <li><a href="#" class="{{ request.path | is_active_item:'blog' }}">Blog</a></li>
           <li><a href="{% url 'portfolio:contact' %}" class="{{ request.path | is_active_item:'contact' }}">Contact</a></li>
         </ul>
