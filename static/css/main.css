@@ -3205,3 +3205,28 @@ header#header {
     transition: 0.3s;
     font-family: var(--font-secondary);
 }
+
+
+span.step-links .page_item {
+    background-color: var(--color-white);
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+    padding: 5px 10px;
+    margin-left: 2px;
+    margin-right: 2px;
+    font-size: 14px;
+    border-radius: 50%;
+}
+
+span.step-links .page_item.active,
+span.step-links a:hover .page_item,
+span.step-links .page_item:hover{
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+span.page_item.next_prev {
+    padding: 5px 8px;
+}
+
+

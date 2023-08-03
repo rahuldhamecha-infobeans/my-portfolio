@@ -1,0 +1,73 @@
+<!doctype html>
+{% extends 'layouts/index.html' %}
+{% load static %}
+{% load portfolio_helper %}
+
+{% block page_title %} Home {% endblock %}
+
+{% block body_block %}
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services m-lg-5">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+          <h2>Our Services</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum accumsan imperdiet est, ac mattis leo rutrum at.</p>
+        </div>
+
+        <div class="row gy-5">
+
+         {% for service in services %}
+             <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+                <div class="service-item">
+                  <div class="img">
+                    <img src="{{ service.service_image.url }}" class="img-fluid" alt="">
+                  </div>
+                  <div class="details position-relative">
+                    <a href="#" class="stretched-link">
+                      <h3>{{ service.service_name }}</h3>
+                    </a>
+                    <p>{{ service.service_description|get_sub_text:100 }}</p>
+                  </div>
+                </div>
+              </div><!-- End Service Item -->
+         {% endfor %}
+
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-ld-12 d-flex justify-content-center">
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if page_obj.has_previous %}
+                            <a href="?page={{ page_obj.previous_page_number }}">
+                                <span class="page_item">&#10094;</span>
+                            </a>
+                        {% endif %}
+
+                        {% for number in page_obj.paginator.page_range %}
+                            {% if page_obj.number == number %}
+                                <a href="javascript:void(0)">
+                                    <span class="page_item active">{{ number }}</span>
+                                </a>
+                            {% else %}
+                                <a href="?page={{ number }}">
+                                    <span class="page_item">{{ number }}</span>
+                                </a>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if page_obj.has_next %}
+                            <a href="?page={{ page_obj.next_page_number }}">
+                                <span class="page_item">&#10095;</span>
+                            </a>
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+        </div>
+
+      </div>
+    </section><!-- End Services Section -->
+
+{% endblock %}
