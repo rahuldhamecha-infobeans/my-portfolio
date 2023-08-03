@@ -11,7 +11,7 @@ def is_active_item(value, param):
         'services': '/services/',
         'portfolio': '/portfolio/',
         'team': '/our-team/',
-        'blog': 'blogs',
+        'blog': '/blogs/',
         'contact': '/contact/',
     }
 
