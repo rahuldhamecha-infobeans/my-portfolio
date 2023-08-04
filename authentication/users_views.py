@@ -8,6 +8,7 @@ from django.urls import reverse, resolve
 from django.contrib.auth.models import User
 from authentication.models import UserProfile
 from django.contrib.auth import update_session_auth_hash
+from django.contrib import messages
 
 
 @method_decorator(login_required, name='dispatch')
@@ -44,6 +45,12 @@ class IndexView(TemplateView):
         initial_data = self.get_user_initial_data(request)
         self.user_form = UserForm(request.POST or None,initial=initial_data)
         self.profile_form = UserProfileForm(request.POST or None,initial=initial_data)
+
+        if 'profile_update' in request.session and request.session['profile_update']:
+            messages.success(request, 'Profile Updated Successfully.')
+
+        request.session['profile_update'] = False
+
         context = {
             'user_form': self.user_form,
             'profile_form': self.profile_form
@@ -89,6 +96,7 @@ class IndexView(TemplateView):
 
                 user_profile.save()
                 update_session_auth_hash(request, user)
+                request.session["profile_update"] = True
             else:
                 print("User  Not Found!")
 

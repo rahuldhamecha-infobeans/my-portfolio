@@ -3298,6 +3298,31 @@ ul.errorlist {
 }
 /* Dashboard Menu CSS */
 
-input:read-only,input:read-only:focus{
+input[type="text"]:read-only,input[type="text"]:read-only:focus{
   background-color: #d1e7dd;
+}
+
+.tox.tox-silver-sink.tox-tinymce-aux {
+    display: none;
+}
+
+.switch_div{
+  padding: 20px 0 0px 50px;
+}
+
+.form-check-input:checked {
+    background-color: var(--color-primary) !important;
+  border:1px solid var(--color-primary) !important;
+}
+
+article.d-flex.flex-column {
+    position: relative;
+    padding-bottom: 80px;
+}
+
+.read-more.mt-auto.align-self-end.mt-4 {
+    position: absolute;
+    bottom: 0;
+    padding: 10px;
+    right: 0;
 }
