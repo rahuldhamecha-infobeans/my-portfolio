@@ -3243,3 +3243,61 @@ ul.errorlist {
     font-weight: 400;
     border-radius: 5px;
 }
+
+.min-height-500{
+  min-height: 500px;
+}
+
+/* Dashboard Menu CSS */
+.dashboard_menu {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    /* padding: 15px; */
+}
+
+.dashboard_menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+}
+
+.dashboard_menu ul li {
+       width: 100%;
+    padding: 10px 55px;
+    border: 1px solid var(--color-primary);
+    color: var(--color-primary);
+    font-size: 20px;
+    font-weight: 700;
+    background-color: var(--color-white);
+}
+
+.dashboard_menu ul li.active {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.dashboard_menu ul li.active a{
+  color: var(--color-white);
+}
+
+.menu_column {
+    border-right: 1px solid var(--color-primary);
+    padding-right: 0;
+}
+
+.php-email-form .form_label{
+  display: block !important;
+}
+/* Dashboard Menu CSS */
+
+input:read-only,input:read-only:focus{
+  background-color: #d1e7dd;
+}

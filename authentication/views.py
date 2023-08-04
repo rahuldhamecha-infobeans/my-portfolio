@@ -73,7 +73,7 @@ class LoginView(View):
                 login_data = self.login_form.cleaned_data
                 user = authenticate(username=login_data['username'],password=login_data['password'])
                 login(request,user)
-                return HttpResponseRedirect(reverse('portfolio:index'))
+                return HttpResponseRedirect(reverse('auth:my_account'))
             else:
                 context = {
                     'is_error': True,

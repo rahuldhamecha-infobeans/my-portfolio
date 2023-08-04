@@ -23,7 +23,7 @@
 
       <div class="button-group">
           {% if user.is_authenticated %}
-              <a class="btn-getstarted scrollto" href="{% url 'portfolio:index' %}">My Account</a>
+              <a class="btn-getstarted scrollto" href="{% url 'auth:my_account' %}">My Account</a>
               <a class="btn-getstarted bordered scrollto" href="{% url 'auth:logout' %}">Logout</a>
           {% else %}
               <a class="btn-getstarted scrollto" href="{% url 'auth:login' %}">Login</a>

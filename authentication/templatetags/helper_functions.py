@@ -13,6 +13,8 @@ def is_active_item(value, param):
         'team': '/our-team/',
         'blog': '/blogs/',
         'contact': '/contact/',
+        'my_account': '/auth/my-account/',
+        'account_blogs': '/auth/blogs/',
     }
 
     for item in paths:
