@@ -1,3 +1,5 @@
+<!doctype html>
+{% load widget_tweaks %}
  <!-- ======= Footer ======= -->
 <footer id="footer" class="footer">
 
@@ -41,8 +43,9 @@
       <div class="col-lg-4 col-md-6 footer-newsletter">
         <h4>Subscribe Newsletter</h4>
         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-        <form action="" method="post">
-          <input type="email" name="newsletter_email" autocomplete="off" placeholder="Enter Your Email"><input type="submit" value="Subscribe" >
+        <form action="{% url 'portfolio:subscribe' %}" method="post">
+            {% csrf_token %}
+            {% render_field subscribe_form.email class="form-control" placeholder="Enter Your Email" autocomplete="off" %}<input type="submit" value="Subscribe" >
         </form>
 
       </div>

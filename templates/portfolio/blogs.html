@@ -16,7 +16,7 @@
         <div class="d-flex justify-content-between align-items-center">
           <h2>Blog</h2>
           <ol>
-            <li><a href="index.html">Home</a></li>
+            <li><a href="{% url 'portfolio:index' %}">Home</a></li>
               {% if blogs_cat %}
               <li><a href="{% url 'blogs:index' %}">Blogs</a></li>
               <li>{{ blogs_cat }}</li>

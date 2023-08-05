@@ -1,9 +1,12 @@
 from django.shortcuts import render
 from django.views.generic import View, TemplateView
-from django.http import HttpResponse
 from portfolio.services.models import Service
-from portfolio.models import Portfolio, Testimonial
+from portfolio.models import Portfolio, Testimonial, Subscriber, Contact
 from blogs.models import Category,Blog
+from django.http import HttpResponseRedirect, HttpResponse
+from django.urls import reverse, resolve
+from portfolio.contact_form import ContactForm
+from django.core.mail import send_mail
 
 
 class IndexView(TemplateView):
@@ -58,3 +61,117 @@ class IndexView(TemplateView):
 
 class ContactView(TemplateView):
     template_name = 'portfolio/contact_us.html'
+    contact_form = ContactForm()
+    
+    def get_context_data(self,**kwargs):
+        context = super().get_context_data(**kwargs)
+        context['contact_form'] = self.contact_form
+        context['contact_sent'] = False
+
+        if 'contact_sent' in self.request.session and self.request.session['contact_sent']:
+            context['contact_sent'] = True
+            self.request.session['contact_sent'] = False
+
+        return context
+
+    def post(self,request,*args,**kwargs):
+        if request.method == 'POST':
+            email = request.POST.get('email')
+            name = request.POST.get('name')
+            subject = request.POST.get('subject')
+            message = request.POST.get('message')
+
+            contact = Contact(email=email,name=name,subject=subject,message=message)
+            contact.save()
+
+            send_mail(
+                "Enquiry Sent Name : {} and Email : {}".format(name,email),
+                "Subject : {} \n Message : {}".format(subject,message),
+                "rahul.dhamecha@infobeans.com",
+                [email],
+                fail_silently=False,
+            )
+
+            request.session['contact_sent'] = True
+        return HttpResponseRedirect(reverse('portfolio:contact'))
+
+class SubscribeView(View):
+
+    def get(self, request, **args):
+        context = {
+            'test' : 'Test Demo'
+        }
+        return render(request,'portfolio/subscribe.html',context)
+
+    def post(self,request,*args,**kwargs):
+        if request.method == 'POST':
+            email = request.POST.get('email')
+            is_subscribe = True
+
+            subscribe = Subscriber.objects.get(email=email)
+
+            if not subscribe:
+                subscribe = Subscriber(email=email)
+
+            subscribe.is_subscribe = is_subscribe
+            subscribe.save()
+
+            request.session['subscribe'] = True
+            request.session['subscribe_email'] = subscribe.email
+        return HttpResponseRedirect(reverse('portfolio:subscribe'))
+
+class SubscribeView(View):
+
+    def get(self, request, **args):
+        context = {
+            'test' : 'Test Demo'
+        }
+        return render(request,'portfolio/subscribe.html',context)
+
+    def post(self,request,*args,**kwargs):
+        if request.method == 'POST':
+            email = request.POST.get('email')
+            is_subscribe = True
+
+            subscribe = Subscriber.objects.get(email=email)
+
+            if not subscribe:
+                subscribe = Subscriber(email=email)
+
+            subscribe.is_subscribe = is_subscribe
+            subscribe.save()
+
+            request.session['subscribe'] = True
+            request.session['subscribe_email'] = subscribe.email
+        return HttpResponseRedirect(reverse('portfolio:subscribe'))
+
+class UnsubscribeView(View):
+
+    def get(self, request, **args):
+        if 'subscribe_email' not in request.session and not request.session['subscribe_email']:
+            return HttpResponseRedirect(reverse('portfolio:index'))
+
+        context = {
+            'test' : 'Test Demo'
+        }
+        return render(request,'portfolio/unsubscribe.html',context)
+
+    def post(self,request,*args,**kwargs):
+        if 'subscribe_email' not in request.session and not request.session['subscribe_email']:
+            return HttpResponseRedirect(reverse('portfolio:index'))
+
+        if request.method == 'POST':
+            email = request.POST.get('email')
+            is_subscribe = False
+
+            subscribe = Subscriber.objects.get(email=email)
+
+            if not subscribe:
+                subscribe = Subscriber(email=email)
+
+            subscribe.is_subscribe = is_subscribe
+            subscribe.save()
+
+            request.session['subscribe'] = is_subscribe
+            request.session['subscribe_email'] = subscribe.email
+        return HttpResponseRedirect(reverse('portfolio:unsubcribe'))

@@ -12,4 +12,6 @@ urlpatterns = [
     path('services/',services_view.IndexView.as_view(),name='services'),
     path('about/',about_view.IndexView.as_view(),name='about'),
     path('portfolio/',portfolio_view.IndexView.as_view(),name='portfolio'),
+    path('subscribe/',views.SubscribeView.as_view(),name='subscribe'),
+    path('unsubscribe/',views.UnsubscribeView.as_view(),name='unsubcribe'),
 ]
