@@ -5,12 +5,12 @@ from blogs.models import Blog,Category
 @admin.register(Blog)
 class BlogAdmin(admin.ModelAdmin):
     list_display = ['title','user','status','date']
-    # list_filter = ['']
+    list_filter = ['categories','status']
     # fields = ['']
     # inlines = []
     # raw_id_fields = ['']
     readonly_fields = ['title','user','date','content','categories','status','blog_image']
-    # search_fields = ['']
+    search_fields = ['title']
     # ordering = ['']
     
 @admin.register(Category)

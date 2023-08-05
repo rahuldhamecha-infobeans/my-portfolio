@@ -98,7 +98,8 @@
                         <a href="{% url 'auth:blog_create' %}" class="btn bg-white color-primary">Create</a>
                     </div>
                     <div class="card-body">
-                        <table class="table table-responsive table-bordered" cellspacing="0" cellpadding="0">
+                        {% if blogs %}
+                            <table class="table table-responsive table-bordered" cellspacing="0" cellpadding="0">
                             <thead>
                                 <th width="40%">Title</th>
                                 <th>Date</th>
@@ -126,6 +127,9 @@
                             </tbody>
                         </table>
                         {% include 'layouts/pagination.html' %}
+                        {% else %}
+                            <div class="alert alert-warning text-center">No Blogs Found</div>
+                        {% endif %}
                     </div>
                 </div>
             </div>

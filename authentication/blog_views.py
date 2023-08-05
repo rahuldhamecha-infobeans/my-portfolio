@@ -45,7 +45,7 @@ class BlogCreateView(LoginRequiredMixin,CreateView):
         return context
 
     def get_success_url(self):
-        return reverse_lazy('auth:blogs')
+        return reverse_lazy('auth:blog_update', kwargs={'pk': self.object.pk})
 
     def form_valid(self, form):
         user = User.objects.get(username=self.request.user)
@@ -83,7 +83,7 @@ class BlogUpdateView(LoginRequiredMixin,UpdateView):
         return context
 
     def get_success_url(self):
-        return reverse_lazy('auth:blogs')
+        return reverse_lazy('auth:blog_update', kwargs={'pk': self.object.pk})
 
     def form_valid(self, form):
         user = User.objects.get(username=self.request.user)

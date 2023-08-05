@@ -109,7 +109,13 @@
                 {% endif %}
                 <div class="card">
                     <div class="card-header bg-primary d-flex align-items-center justify-content-between">
-                        <h4 class="text-center color-white align-items-center m-md-0">Create Blogs</h4>
+                        <h4 class="text-center color-white align-items-center m-md-0">
+                            {% if not form.instance.pk %}
+                                Create Blog
+                            {% else %}
+                                Update Blog
+                            {% endif %}
+                        </h4>
                         <a href="{% url 'auth:blogs' %}" class="btn bg-white color-primary">Back</a>
                     </div>
                     <div class="card-body">

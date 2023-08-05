@@ -17,7 +17,31 @@ class IndexView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['all_cats'] = self.get_all_categories()
+        search_cat = self.request.GET.get('search_cat')
+        search_title = self.request.GET.get('search_title')
+        if search_title:
+            context['search_title'] = search_title
+        if search_cat:
+            context['blogs_cat'] = search_cat
         return context
+
+    def get_queryset(self):
+        blogs = super().get_queryset()
+        search_title = self.request.GET.get('search_title')
+        search_cat = self.request.GET.get('search_cat')
+        blogs = blogs.filter(status=True)
+        if search_title:
+            blogs = blogs.filter(title__contains=search_title)
+
+        if search_cat:
+            blogs = blogs.filter(categories__name__startswith=search_cat)
+        return blogs
+
+    def get_all_categories(self):
+        categories = Category.objects.all()
+        return categories
+
 
 class BlogDetailView(DetailView):
     template_name = 'portfolio/blog_details.html'

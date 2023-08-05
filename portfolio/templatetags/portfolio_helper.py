@@ -28,5 +28,5 @@ def slugify(value):
 
 @register.filter(name='blog_length')
 def blog_length(value):
-    blog_len = value.blog_set.all()
+    blog_len = value.blog_set.filter(status=True)
     return len(blog_len)
