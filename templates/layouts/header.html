@@ -1,0 +1,60 @@
+<!doctype html>
+{% load static %}
+{% load helper_functions %}
+<header id="header" class="header fixed-top" data-scrollto-offset="0">
+    <div class="container-fluid d-flex align-items-center justify-content-between">
+
+      <a href="{% url 'portfolio:index' %}" class="logo d-flex align-items-center scrollto me-auto me-lg-0">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <h1>Rahul Dhamecha<span>.</span></h1>
+      </a>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+         <li><a class="nav-link scrollto {{ request.path | is_active_item:'home' }}" href="{% url 'portfolio:index' %}">Home</a></li>
+          <li><a class="nav-link scrollto {{ request.path | is_active_item:'about' }}" href="{% url 'portfolio:about' %}">About</a></li>
+          <li><a class="nav-link scrollto {{ request.path | is_active_item:'services' }}" href="{% url 'portfolio:services' %}">Services</a></li>
+          <li><a class="nav-link scrollto {{ request.path | is_active_item:'portfolio' }}" href="{% url 'portfolio:portfolio' %}">Portfolio</a></li>
+          <li><a href="{% url 'blogs:index' %}" class="{{ request.path | is_active_item:'blog' }}">Blog</a></li>
+          <li><a href="{% url 'portfolio:contact' %}" class="{{ request.path | is_active_item:'contact' }}">Contact</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle d-none"></i>
+      </nav><!-- .navbar -->
+
+      <div class="button-group login_logout_section">
+          {% if user.is_authenticated %}
+              <div class="profile_button btn btn-primary d-flex justify-content-center align-items-center gap-2" onclick="open_profile_popup()">
+                  <img src="{{ request.user.userprofile.profile_pic.url }}" alt="">
+                  {{ request.user.first_name }} {{ request.user.last_name }}
+              </div>
+              <div class="profile_popup">
+                    <div class="profile_title d-flex align-items-center gap-2">
+                        <img src="{{ request.user.userprofile.profile_pic.url }}" alt="">
+                        <b>{{ request.user.first_name }} {{ request.user.last_name }}</b>
+                    </div>
+                    <div class="profile_menu">
+                        <ul>
+                              <li>
+                                  <a class="link_item" href="{% url 'auth:my_account' %}">&#10095; &nbsp;&nbsp; My Profile</a>
+                              </li>
+                              <li>
+                                  <a class="link_item" href="{% url 'auth:logout' %}">&#10095; &nbsp;&nbsp; Logout</a>
+                              </li>
+                        </ul>
+                    </div>
+              </div>
+{#              <a class="btn-getstarted bordered scrollto" href="{% url 'auth:logout' %}">Logout</a>#}
+          {% else %}
+              <a class="btn-getstarted scrollto" href="{% url 'auth:login' %}">Login</a>
+            <a class="btn-getstarted bordered scrollto" href="{% url 'auth:register' %}">Register</a>
+          {% endif %}
+      </div>
+
+    </div>
+</header><!-- End Header -->
+
+<script>
+  function open_profile_popup(){
+      jQuery('.profile_popup').toggleClass('active')
+  }
+</script>

@@ -1,0 +1,93 @@
+<!doctype html>
+{% extends 'layouts/index.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block page_title %} Register {% endblock %}
+
+{% block body_block %}
+     <div class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Register</h2>
+          <ol>
+            <li><a href="{% url 'portfolio:index' %}">Home</a></li>
+            <li>Register</li>
+          </ol>
+        </div>
+
+      </div>
+    </div><!-- End Breadcrumbs -->
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-6">
+                    <div class="my-2">
+                       {% if is_error %}
+                        <div class="sent-message bg-danger p-2 text-center text-white" style="display: block;">Oops....something went wrong!</div>
+                       {% endif %}
+                        {% if is_registered %}
+                            <div class="sent-message bg-primary p-2 text-center text-white" style="display: block;">Registered Successfully!</div>
+                        {% endif %}
+                  </div>
+                    <div class="card">
+                        <div class="card-header bg-primary">
+                            <h2 class="text-center text-white">Register Here</h2>
+                        </div>
+                        <form method="POST" class="php-email-form" enctype="multipart/form-data">
+                        <div class="card-body">
+                              {% csrf_token %}
+
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <label for="username">First Name <span class="link-danger">*</span> </label>
+                                    {% render_field user_form.first_name class="form-control" placeholder="First Name" required=True autocomplete="off" %}
+                                </div>
+
+                                <div class="col-md-6 form-group mt-3 mt-md-0">
+                                    <label for="username">Last Name <span class="link-danger">*</span> </label>
+                                   {% render_field user_form.last_name class="form-control" placeholder="Last Name" required=True autocomplete="off" %}
+                                </div>
+                              </div>
+
+                              <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <label for="username">Username <span class="link-danger">*</span> </label>
+                                    {% render_field user_form.username class="form-control" placeholder="UserName" autocomplete="off" %}
+                                </div>
+
+                                <div class="col-md-6 form-group mt-3 mt-md-0">
+                                    <label for="username">Password <span class="link-danger">*</span> </label>
+                                   {% render_field user_form.password class="form-control" placeholder="Password" autocomplete="off" %}
+                                </div>
+                              </div>
+                              <div class="row">
+                                    <div class="col-md-6 form-group mt-3 mt-md-0">
+                                      <label for="username">Email <span class="link-danger">*</span> </label>
+                                      {% render_field user_form.email class="form-control" placeholder="Email Address" autocomplete="off" %}
+                                    </div>
+                                    <div class="col-md-6 form-group mt-3 mt-md-0">
+                                        <label for="username">Social Profile</label>
+                                      {% render_field profile_form.social_link class="form-control" placeholder="Social Profile" autocomplete="off" %}
+                                    </div>
+                              </div>
+                                <div class="form-group mt-3 mt-md-0">
+                                     <label for="username mb-4">Profile Picture : </label>
+                                     {% render_field profile_form.profile_pic class="form-control" %}
+                                </div>
+                        </div>
+                            <div class="card-footer">
+                                <div class="text-center">
+                                    <button class="btn-getstarted bordered" type="submit">Register</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

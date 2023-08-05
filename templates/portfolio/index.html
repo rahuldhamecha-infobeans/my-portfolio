@@ -1,0 +1,191 @@
+<!doctype html>
+{% extends 'layouts/index.html' %}
+{% load static %}
+{% load portfolio_helper %}
+
+{% block page_title %} Home {% endblock %}
+
+{% block body_block %}
+    <section id="hero-static" class="hero-static d-flex align-items-center">
+        <div class="container d-flex flex-column justify-content-center align-items-center text-center position-relative" data-aos="zoom-out">
+          <h2>Welcome to <span>Rahul Dhamecha</span></h2>
+          <p>Write your own blog on my site.</p>
+          <div class="d-flex">
+              {% if user.is_authenticated %}
+                  <a href="{% url 'auth:my_account' %}" class="btn-get-started scrollto">My Account</a>
+              {% else %}
+                  <a href="{% url 'auth:login' %}" class="btn-get-started scrollto">Login</a>
+            <a href="{% url 'auth:register' %}" class="btn-watch-video d-flex align-items-center"><i class="bi bi-person-circle"></i><span>Register</span></a>
+              {% endif %}
+          </div>
+        </div>
+      </section>
+    <!-- ======= Featured Services Section ======= -->
+    <section id="featured-services" class="featured-services">
+      <div class="container">
+        <div class="row gy-4">
+
+          {% for category in blog_categories %}
+              <div class="col-xl-3 col-md-6 d-flex" data-aos="zoom-out">
+                <div class="service-item position-relative">
+                  <div class="icon">
+                      <img src="{{ category.category_image.url }}" alt="">
+                  </div>
+                  <h4><a href="{% url 'blogs:index' %}?search_cat={{ category.name }}" class="stretched-link">{{  category.name }}</a></h4>
+                  <p>{{ category.description|get_sub_text:100 }}</p>
+                </div>
+              </div><!-- End Service Item -->
+          {% endfor %}
+
+        </div>
+
+      </div>
+    </section><!-- End Featured Services Section -->
+
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+          <h2>About Us</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum accumsan imperdiet est, ac mattis leo rutrum at. Donec vestibulum volutpat metus, et suscipit quam scelerisque consectetur. Nullam ultrices tellus at tellus accumsan auctor. Proin non pulvinar nibh. Sed vitae nunc ac ligula feugiat aliquam. Praesent malesuada at lorem eu semper. Integer nisi nulla, fermentum in dui quis, iaculis rutrum lectus. Fusce ultrices non nulla tempus vestibulum. Etiam faucibus orci lorem. Suspendisse efficitur felis tincidunt sagittis volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed convallis pretium arcu, eu varius dolor vehicula sed. Sed porta id quam ut ullamcorper. Praesent efficitur magna sed ante dapibus, vitae placerat tellus malesuada. Nullam aliquet dui quam, ac placerat erat blandit vel. Proin consequat condimentum eros, vitae volutpat arcu mollis ut. Morbi fermentum eros sit amet consequat lacinia. Fusce aliquet arcu lacinia ultrices bibendum. Quisque leo arcu, cursus vitae eleifend tempor, lacinia ac metus. Nullam nec dolor sollicitudin, condimentum velit sed, finibus lectus. Aenean efficitur suscipit dignissim. Phasellus eget augue nisi. Phasellus dictum velit urna, vel ultricies ligula rhoncus et. Fusce sollicitudin molestie justo sit amet feugiat. Quisque rutrum quis neque nec bibendum. Mauris cursus, augue eget efficitur consequat, arcu lorem malesuada lorem, ut.</p>
+            <a href="{% url 'portfolio:about' %}" class="btn btn-primary mt-4">Learn More</a>
+        </div>
+
+      </div>
+    </section><!-- End About Section -->
+
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+          <h2>Our Services</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum accumsan imperdiet est, ac mattis leo rutrum at.</p>
+        </div>
+
+        <div class="row gy-5">
+
+         {% for service in services %}
+             <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="{% widthratio forloop.counter 1 100 %}">
+                <div class="service-item">
+                  <div class="img">
+                    <img src="{{ service.service_image.url }}" class="img-fluid" alt="">
+                  </div>
+                  <div class="details position-relative">
+                    <a href="#" class="stretched-link">
+                      <h3>{{ service.service_name }}</h3>
+                    </a>
+                    <p>{{ service.service_description|get_sub_text:100 }}</p>
+                  </div>
+                </div>
+              </div><!-- End Service Item -->
+         {% endfor %}
+
+        </div>
+
+      </div>
+    </section><!-- End Services Section -->
+
+    <!-- ======= Testimonials Section ======= -->
+    <section id="testimonials" class="testimonials">
+      <div class="container" data-aos="fade-up">
+
+        <div class="testimonials-slider swiper">
+          <div class="swiper-wrapper">
+
+            {% for testimonial in testimonials %}
+                <div class="swiper-slide">
+                  <div class="testimonial-item">
+                    <h3>{{ testimonial.name }}</h3>
+                    <h4>{{ testimonial.position }}</h4>
+                    <p>
+                      <i class="bi bi-quote quote-icon-left"></i>
+                      {{ testimonial.content }}
+                      <i class="bi bi-quote quote-icon-right"></i>
+                    </p>
+                  </div>
+                </div><!-- End testimonial item -->
+            {% endfor %}
+
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+      </div>
+    </section><!-- End Testimonials Section -->
+
+    <!-- ======= Portfolio Section ======= -->
+    <section id="portfolio" class="portfolio" data-aos="fade-up">
+
+      <div class="container">
+
+        <div class="section-header">
+          <h2>Portfolio</h2>
+          <p>Non hic nulla eum consequatur maxime ut vero memo vero totam officiis pariatur eos dolorum sed fug dolorem est possimus esse quae repudiandae. Dolorem id enim officiis sunt deserunt esse soluta consequatur quaerat</p>
+        </div>
+
+      </div>
+
+      <div class="container-fluid" data-aos="fade-up" data-aos-delay="200">
+
+        <div class="portfolio-isotope" data-portfolio-filter="*" data-portfolio-layout="masonry" data-portfolio-sort="original-order">
+
+          <ul class="portfolio-flters">
+            <li data-filter="*" class="filter-active">All</li>
+           {% for category in portfolio.portfolio_categories %}
+              <li data-filter=".filter-{{ category|replace_special_charcter }}">{{ category }}</li>
+           {% endfor %}
+          </ul><!-- End Portfolio Filters -->
+
+          <div class="row g-0 portfolio-container">
+            {% for portfolio in portfolio.portfolios %}
+                <div class="col-xl-3 col-lg-4 col-md-6 portfolio-item filter-{{ portfolio.category.name|replace_special_charcter }}">
+                  <img src="{{ portfolio.image.url }}" class="img-fluid" alt="">
+                  <div class="portfolio-info">
+                    <h4>{{ portfolio.name }}</h4>
+                    <a href="{{ portfolio.image.url }}" title="{{ portfolio.name }}" data-gallery="portfolio-gallery" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+{#                    <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>#}
+                  </div>
+                </div><!-- End Portfolio Item -->
+            {% endfor %}
+
+          </div><!-- End Portfolio Container -->
+
+        </div>
+
+      </div>
+    </section><!-- End Portfolio Section -->
+
+    <!-- ======= Recent Blog Posts Section ======= -->
+    <section id="recent-blog-posts" class="recent-blog-posts">
+
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+          <h2>Blog</h2>
+          <p>Recent posts form our Blog</p>
+        </div>
+
+        <div class="row">
+           {% for blog in recent_blogs %}
+              <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="post-box">
+                  <div class="post-img"><img src="{{ blog.blog_image.url }}" class="img-fluid" alt=""></div>
+                  <div class="meta">
+                    <span class="post-date">{{ blog.date }}</span>
+                    <span class="post-author"> / {{ blog.user.first_name }} {{  blog.user.last_name }}</span>
+                  </div>
+                  <h3 class="post-title">{{  blog.title }}</h3>
+                  <a href="{% url 'blogs:blog_details' pk=blog.pk name=blog.title|slugify %}" class="readmore stretched-link"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+                </div>
+              </div>
+           {% endfor %}
+
+        </div>
+
+      </div>
+
+    </section><!-- End Recent Blog Posts Section -->
+
+{% endblock %}

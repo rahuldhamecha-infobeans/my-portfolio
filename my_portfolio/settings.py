@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+
 from . import env
 import os
 
@@ -49,6 +50,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'portfolio',
+    'authentication',
+    'widget_tweaks',
+    'blogs'
 ]
 
 MIDDLEWARE = [
@@ -74,6 +79,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'blogs.context_processors.footer_data'
             ],
         },
     },
@@ -150,7 +156,17 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
 
+LOGIN_URL = '/auth/login/'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = config['email_host']
+EMAIL_USE_TLS = config['email_ssl']
+EMAIL_PORT = config['email_port']
+EMAIL_HOST_USER = config['email_user']
+EMAIL_HOST_PASSWORD = config['email_password']

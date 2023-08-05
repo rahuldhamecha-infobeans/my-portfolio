@@ -1,0 +1,67 @@
+<!doctype html>
+{% extends 'layouts/index.html' %}
+{% load static %}
+{% load portfolio_helper %}
+
+{% block page_title %} About us {% endblock %}
+
+{% block body_block %}
+
+     <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>About Us</h2>
+          <ol>
+            <li><a href="{% url 'portfolio:index' %}">Home</a></li>
+            <li>About Us</li>
+          </ol>
+        </div>
+
+      </div>
+    </div><!-- End Breadcrumbs -->
+   <!-- ======= Portfolio Section ======= -->
+    <section id="portfolio" class="portfolio" data-aos="fade-up">
+
+      <div class="container">
+
+        <div class="section-header">
+          <h2>Portfolio</h2>
+          <p>Non hic nulla eum consequatur maxime ut vero memo vero totam officiis pariatur eos dolorum sed fug dolorem est possimus esse quae repudiandae. Dolorem id enim officiis sunt deserunt esse soluta consequatur quaerat</p>
+        </div>
+
+      </div>
+
+      <div class="container-fluid" data-aos="fade-up" data-aos-delay="200">
+
+        <div class="portfolio-isotope" data-portfolio-filter="*" data-portfolio-layout="masonry" data-portfolio-sort="original-order">
+
+          <ul class="portfolio-flters">
+            <li data-filter="*" class="filter-active">All</li>
+           {% for category in portfolio.portfolio_categories %}
+              <li data-filter=".filter-{{ category|replace_special_charcter }}">{{ category }}</li>
+           {% endfor %}
+          </ul><!-- End Portfolio Filters -->
+
+          <div class="row g-0 portfolio-container">
+            {% for portfolio in portfolio_list %}
+                <div class="col-xl-4 col-lg-4 col-md-6 portfolio-item filter-{{ portfolio.category.name|replace_special_charcter }}">
+                  <img src="{{ portfolio.image.url }}" class="img-fluid" alt="">
+                  <div class="portfolio-info">
+                    <h4>{{ portfolio.name }}</h4>
+                    <a href="{{ portfolio.image.url }}" title="{{ portfolio.name }}" data-gallery="portfolio-gallery" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+{#                    <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>#}
+                  </div>
+                </div><!-- End Portfolio Item -->
+            {% endfor %}
+
+          </div><!-- End Portfolio Container -->
+            {% include 'layouts/pagination.html' %}
+
+        </div>
+
+      </div>
+    </section><!-- End Portfolio Section -->
+
+{% endblock %}

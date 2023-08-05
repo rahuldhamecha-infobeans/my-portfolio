@@ -1,0 +1,116 @@
+<!doctype html>
+{% extends 'layouts/index.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% load helper_functions %}
+
+{% block page_title %} Login {% endblock %}
+
+{% block body_block %}
+     <div class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>My Account</h2>
+          <ol>
+            <li><a href="{% url 'portfolio:index' %}">Home</a></li>
+            <li>My Account</li>
+          </ol>
+        </div>
+
+      </div>
+    </div><!-- End Breadcrumbs -->
+
+    <div class="container mt-5 mb-5">
+            <div class="row">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-6">
+                    <div class="dashboard_menu">
+                        <ul>
+                            <li class="{{ request.path | is_active_item:'my_account' }}">
+                                <a href="{% url 'auth:my_account' %}">
+                                    My Account
+                                </a>
+                            </li>
+                            <li class="{{ request.path | is_active_item:'account_blogs' }}">
+                                <a href="{% url 'auth:blogs' %}">
+                                    Blogs
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    <div class="container mb-3">
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8">
+                {% if messages %}
+                    <div class="alert alert-success">
+                        <ul style="list-style: none;padding: 0;margin: 0">
+                            {% for message in messages %}
+                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+                <div class="card">
+                    <div class="card-header bg-primary d-flex align-items-center justify-content-center">
+                        <h4 class="text-center color-white align-items-center m-md-0">My Profile</h4>
+                    </div>
+                    <form method="POST" class="php-email-form" enctype="multipart/form-data">
+                        <div class="card-body">
+                             {% csrf_token %}
+                            <input type="hidden" name="id" value="{{ request.user.id }}">
+                            <div class="row mt-3">
+                                <div class="col-md-6 form-group">
+                                    <label for="username">First Name <span class="link-danger">*</span> </label>
+                                    {% render_field user_form.first_name class="form-control" placeholder="First Name" required=True autocomplete="off" %}
+                                </div>
+
+                                <div class="col-md-6 form-group">
+                                    <label for="username">Last Name <span class="link-danger">*</span> </label>
+                                   {% render_field user_form.last_name class="form-control" placeholder="Last Name" required=True autocomplete="off" %}
+                                </div>
+                              </div>
+
+                              <div class="row mt-3">
+                                <div class="col-md-6 form-group">
+                                    <label for="username">Username <span class="link-danger">*</span> </label>
+                                    {% render_field user_form.username class="form-control" placeholder="UserName" readonly=True autocomplete="off" %}
+                                </div>
+
+                                <div class="col-md-6 form-group mt-3 mt-md-0">
+                                    <label for="username">Password </label>
+                                    <input type="password" name="password" autocomplete="off" placeholder="Password" class="form-control" id="id_password">
+                                </div>
+                              </div>
+                              <div class="row mt-3">
+                                    <div class="col-md-6 form-group mt-3 mt-md-0">
+                                      <label for="username">Email <span class="link-danger">*</span> </label>
+                                      {% render_field user_form.email class="form-control" placeholder="Email Address" autocomplete="off" %}
+                                    </div>
+                                    <div class="col-md-6 form-group mt-3 mt-md-0">
+                                        <label for="username">Social Profile</label>
+                                      {% render_field profile_form.social_link class="form-control" placeholder="Social Profile" autocomplete="off" %}
+                                    </div>
+                              </div>
+                            <div class="form-group mt-3">
+                                 <label for="username mb-4" class="form_label">Profile Picture : </label>
+                                 {% render_field profile_form.profile_pic class="form-control" %}
+                            </div>
+                        </div>
+                            <div class="card-footer">
+                                <div class="text-center">
+                                    <button class="btn btn-primary" type="submit">Update Profile</button>
+                                </div>
+                            </div>
+                        </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

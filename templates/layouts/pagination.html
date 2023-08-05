@@ -1,0 +1,32 @@
+<!doctype html>
+<div class="row mt-5">
+    <div class="col-ld-12 d-flex justify-content-center">
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}">
+                        <span class="page_item">&#10094;</span>
+                    </a>
+                {% endif %}
+
+                {% for number in page_obj.paginator.page_range %}
+                    {% if page_obj.number == number %}
+                        <a href="javascript:void(0)">
+                            <span class="page_item active">{{ number }}</span>
+                        </a>
+                    {% else %}
+                        <a href="?page={{ number }}">
+                            <span class="page_item">{{ number }}</span>
+                        </a>
+                    {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">
+                        <span class="page_item">&#10095;</span>
+                    </a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+</div>

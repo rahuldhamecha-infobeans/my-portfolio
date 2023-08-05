@@ -1,0 +1,116 @@
+<!doctype html>
+{% extends 'layouts/index.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% load helper_functions %}
+
+{% block page_title %} Blogs  {% endblock %}
+
+{% block body_styles %}
+    <link rel="stylesheet" href="{% static 'css/select2.min.css' %}">
+{% endblock %}
+
+{% block body_scripts %}
+    <script src="{% static 'js/ckeditor.js' %}"></script>
+    <script src="{% static 'js/select2.min.js' %}"></script>
+    <script>
+    ClassicEditor
+        .create( document.querySelector( 'textarea' ), {
+            toolbar: {
+                items: [
+                    'undo', 'redo',
+                    '|', 'heading',
+                    '|', 'bold', 'italic',
+                    '|', 'link', 'insertTable', 'mediaEmbed',
+                    '|', 'bulletedList', 'numberedList', 'outdent', 'indent'
+                ]
+            },
+        } )
+        .then( editor => {
+            window.editor = editor;
+        } )
+        .catch( err => {
+            console.error( err );
+        } );
+
+        jQuery(document).ready(function(){
+            jQuery('#id_categories').select2({
+                allowClear: true,
+                tags:true
+            })
+
+            jQuery( "#id_date" ).datepicker({
+                    changeYear: true,
+                    changeMonth: true,
+                   dateFormat: 'dd/mm/yy',
+                   showAnim: 'slideDown',
+                   duration: 'fast',
+               }).attr('readonly', 'true');
+        })
+    </script>
+
+{% endblock %}
+
+{% block body_block %}
+     <div class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>My Account</h2>
+          <ol>
+            <li><a href="{% url 'portfolio:index' %}">Home</a></li>
+            <li>My Blogs</li>
+          </ol>
+        </div>
+
+      </div>
+    </div><!-- End Breadcrumbs -->
+
+   <div class="container mt-5 mb-5">
+            <div class="row">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-6">
+                    <div class="dashboard_menu">
+                        <ul>
+                            <li class="{{ request.path | is_active_item:'my_account' }}">
+                                <a href="{% url 'auth:my_account' %}">
+                                    My Account
+                                </a>
+                            </li>
+                            <li class="{{ request.path | is_active_item:'account_blogs' }}">
+                                <a href="{% url 'auth:blogs' %}">
+                                    Blogs
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    <div class="container mb-3">
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header bg-primary d-flex align-items-center justify-content-between">
+                        <h4 class="text-center color-white align-items-center m-md-0">My Blogs</h4>
+                        <a href="{% url 'auth:blog_create' %}" class="btn bg-white color-primary">Delete Blog</a>
+                    </div>
+                    <form method="post">
+                    <div class="card-body text-center">
+                            {% csrf_token %}
+                        <p>Are you sure, you want to delete blog ? <br> <b>{{  blog.title }}</b> </p>
+                    </div>
+                        <div class="card-footer text-center">
+                            <input type="submit" value="Delete" class="btn btn-danger m-2">
+                            <a href="{% url 'auth:blogs' %}" class="btn btn-secondary m-2">Cancel</a>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
