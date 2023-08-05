@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import View, TemplateView
 from django.http import HttpResponse
 from portfolio.services.models import Service
-from portfolio.models import Portfolio, PortfolioCategory
+from portfolio.models import Portfolio, Testimonial
 from blogs.models import Category,Blog
 
 
@@ -15,6 +15,7 @@ class IndexView(TemplateView):
         context['portfolio'] = self.get_portfolios()
         context['blog_categories'] = self.get_blogs_categories()
         context['recent_blogs'] = self.get_blogs()
+        context['testimonials'] = self.get_testimonials()
         return context
 
     def get_services(self):
@@ -40,6 +41,10 @@ class IndexView(TemplateView):
             categories = categories[:limit]
 
         return categories
+
+    def get_testimonials(self):
+        testimonials = Testimonial.objects.order_by('-id')
+        return testimonials
 
     def get_blogs(self):
         blogs = Blog.objects.filter(status=True).order_by('id')

@@ -24,3 +24,11 @@ class Portfolio(models.Model):
         return mark_safe('<img src="%s" width="100px" height="100px" />' % (self.image.url))
 
     portfolio_image.short_description = 'Portfolio Image'
+    
+class Testimonial(models.Model):
+    name = models.CharField(blank=False,max_length=256)
+    position = models.CharField(blank=False,max_length=256)
+    content = models.TextField(blank=False)
+
+    def __str__(self):
+        return self.name

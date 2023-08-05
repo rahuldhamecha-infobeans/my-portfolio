@@ -1,6 +1,6 @@
 from django.contrib import admin
 from portfolio.services.models import Service
-from portfolio.models import Portfolio, PortfolioCategory
+from portfolio.models import Portfolio, PortfolioCategory, Testimonial
 
 
 @admin.register(Service)
@@ -32,4 +32,11 @@ class PortfolioCategoryAdmin(admin.ModelAdmin):
     # readonly_fields = ['']
     # search_fields = ['']
     # ordering = ['']
+    
+@admin.register(Testimonial)
+class TestimonialAdmin(admin.ModelAdmin):
+    list_display = ['name','position','content']
+    ordering = ['id']
+    list_per_page = 10
+    
     
