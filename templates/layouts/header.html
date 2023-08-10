@@ -26,12 +26,16 @@
       <div class="button-group login_logout_section">
           {% if user.is_authenticated %}
               <div class="profile_button btn btn-primary d-flex justify-content-center align-items-center gap-2" onclick="open_profile_popup()">
-                  <img src="{{ request.user.userprofile.profile_pic.url }}" alt="">
+                   {% if request.user.userprofile.profile_pic %}
+                        <img src="{{ request.user.userprofile.profile_pic.url }}" alt="">
+                    {% endif %}
                   {{ request.user.first_name }} {{ request.user.last_name }}
               </div>
               <div class="profile_popup">
                     <div class="profile_title d-flex align-items-center gap-2">
-                        <img src="{{ request.user.userprofile.profile_pic.url }}" alt="">
+                        {% if request.user.userprofile.profile_pic %}
+                            <img src="{{ request.user.userprofile.profile_pic.url }}" alt="">
+                        {% endif %}
                         <b>{{ request.user.first_name }} {{ request.user.last_name }}</b>
                     </div>
                     <div class="profile_menu">
