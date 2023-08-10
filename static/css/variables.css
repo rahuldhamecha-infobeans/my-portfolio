@@ -30,20 +30,20 @@
 
   /* Default text color */
   --color-default: #1a1f24;
-  --color-default-rgb: 26, 31, 36;
+  --color-default-rgb: 211, 31, 55;
 
   /* Defult links color */
-  --color-links: #0ea2bd;
-  --color-links-hover: #1ec3e0;
+  --color-links: #f50021;
+  --color-links-hover: #d31f37;
 
   /* Primay colors */
-  --color-primary: #0ea2bd;
-  --color-primary-light: #1ec3e0;
-  --color-primary-dark: #0189a1;
+  --color-primary: #f50021;
+  --color-primary-light: #f50021;
+  --color-primary-dark: #f50021;
 
-  --color-primary-rgb: 14, 162, 189;
-  --color-primary-light-rgb: 30, 195, 224;
-  --color-primary-dark-rgb: 1, 137, 161;
+  --color-primary-rgb: 211, 31, 55;
+  --color-primary-light-rgb: 211, 31, 55;
+  --color-primary-dark-rgb: 211, 31, 55;
 
   /* Secondary colors */
   --color-secondary: #485664;

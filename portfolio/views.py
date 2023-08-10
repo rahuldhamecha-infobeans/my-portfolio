@@ -108,32 +108,10 @@ class SubscribeView(View):
             email = request.POST.get('email')
             is_subscribe = True
 
-            subscribe = Subscriber.objects.get(email=email)
-
-            if not subscribe:
-                subscribe = Subscriber(email=email)
-
-            subscribe.is_subscribe = is_subscribe
-            subscribe.save()
-
-            request.session['subscribe'] = True
-            request.session['subscribe_email'] = subscribe.email
-        return HttpResponseRedirect(reverse('portfolio:subscribe'))
-
-class SubscribeView(View):
-
-    def get(self, request, **args):
-        context = {
-            'test' : 'Test Demo'
-        }
-        return render(request,'portfolio/subscribe.html',context)
-
-    def post(self,request,*args,**kwargs):
-        if request.method == 'POST':
-            email = request.POST.get('email')
-            is_subscribe = True
-
-            subscribe = Subscriber.objects.get(email=email)
+            try:
+                subscribe = Subscriber.objects.get(email=email)
+            except Subscriber.DoesNotExist:
+                subscribe = None
 
             if not subscribe:
                 subscribe = Subscriber(email=email)

@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'debug_toolbar',
     'portfolio',
     'authentication',
     'widget_tweaks',
@@ -64,6 +65,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'portfolio.middleware.my_middleware.MyMiddleware'
 ]
 
 ROOT_URLCONF = 'my_portfolio.urls'
@@ -147,6 +150,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+
+INTERNAL_IPS = [
+    '127.0.0.1'
+]
+
 # Static Files Directories
 STATICFILES_DIRS = [
     STATIC_DIR,MEDIA_DIR
