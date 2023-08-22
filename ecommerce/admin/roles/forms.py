@@ -11,7 +11,6 @@ class RoleForm(FlaskForm):
     submit = SubmitField('Submit')
 
     def validate_name(self, name):
-        print(self.role_id.data+'-----test')
         if self.role_id.data:
             role = Role.query.get(self.role_id.data)
             if role.name != self.name.data and Role.query.filter_by(name=self.name.data).first():
