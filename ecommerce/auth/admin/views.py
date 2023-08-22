@@ -19,7 +19,7 @@ def admin_login():
             next = request.args.get('next')
 
             if next == None or not next[0] == '/':
-                next = url_for('front.index')
+                next = url_for('dashboard.index')
 
             return redirect(next)
         else:

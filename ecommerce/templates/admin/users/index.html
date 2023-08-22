@@ -2,7 +2,52 @@
 
 {% block page_title %} Users {% endblock %}
 
+{% block page_body_title %} Users {% endblock %}
 
 {% block body_block %}
-    {{ url_for(request.endpoint) }}
+  <!-- Basic Layout -->
+  <div class="row">
+    <div class="col-xl">
+      <div class="card mb-12">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h5 class="mb-0">User Listing</h5>
+          <small class="text-muted float-end">
+              <a href="{{ url_for('roles.create') }}" class="btn btn-outline-primary">Create User</a>
+          </small>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive text-nowrap">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Id</th>
+                        <th>Full Name</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                    {% for user in users %}
+                    	<tr>
+                        <td>{{ user.id or None }}</td>
+                        <td>{{ user.full_name or None }}</td>
+                        <td>{{ user.username or None }}</td>
+                        <td>{{ user.email or None }}</td>
+                        <td>{{ user.role_name() }}</td>
+                        <td>
+                          <a href="{{ url_for('users.update',id=user.id) }}" class="btn btn-outline-primary"><i class="bx bx-edit-alt me-1"></i></a>
+                          <a href="{{ url_for('users.delete',id=user.id) }}" class="btn btn-outline-danger"><i class="bx bx-trash me-1"></i></a>
+                        </td>
+                      </tr>
+                    {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
 {% endblock %}
