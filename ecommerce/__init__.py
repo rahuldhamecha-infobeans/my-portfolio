@@ -6,5 +6,6 @@ def create_ecommerce_app():
 	return app
 
 app = create_ecommerce_app()
+app.config['SECRET_KEY'] = 'ecommerce_secret_key'
 
 import ecommerce.register_application

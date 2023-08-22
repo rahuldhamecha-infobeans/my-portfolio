@@ -6,6 +6,12 @@
     <div class="container-xxl">
       <div class="authentication-wrapper authentication-basic container-p-y">
         <div class="authentication-inner">
+        {% for field, errors in form.errors.items() %}
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                {{ form[field].label }}: {{ ', '.join(errors) }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
           <!-- Register Card -->
           <div class="card">
             <div class="card-body">
@@ -18,37 +24,32 @@
                 </a>
               </div>
 
-              <form id="formAuthentication" class="mb-3" action="index.html" method="POST">
+              <form id="formAuthentication" class="mb-3" method="POST">
+                {{ form.hidden_tag() }}
                 <div class="mb-3">
                   <label for="username" class="form-label">Username</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="username"
-                    name="username"
-                    placeholder="Enter your username"
-                    autofocus
-                  />
+                  {{ form.username(class="form-control",placeholder="Enter your username",id="username",autofocus=True) }}
                 </div>
                 <div class="mb-3">
                   <label for="email" class="form-label">Email</label>
-                  <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email" />
+                    {{ form.email(class="form-control",id="email",placeholder="Enter your email") }}
                 </div>
                 <div class="mb-3 form-password-toggle">
                   <label class="form-label" for="password">Password</label>
                   <div class="input-group input-group-merge">
-                    <input
-                      type="password"
-                      id="password"
-                      class="form-control"
-                      name="password"
-                      placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                      aria-describedby="password"
-                    />
+                    {{ form.password(id="password",class="form-control",placeholder="xxxxxxxxxxxxxxxxx") }}
                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                   </div>
                 </div>
-                <button class="btn btn-primary d-grid w-100">Sign up</button>
+
+                  <div class="mb-3 form-password-toggle">
+                  <label class="form-label" for="password">Confirm Password</label>
+                  <div class="input-group input-group-merge">
+                    {{ form.pass_confirm(id="password_confirm",class="form-control",placeholder="xxxxxxxxxxxxxxxxx") }}
+                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                  </div>
+                </div>
+                {{ form.submit(class="btn btn-primary d-grid w-100") }}
               </form>
 
               <p class="text-center">
