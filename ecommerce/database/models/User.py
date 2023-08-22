@@ -32,8 +32,8 @@ class User(db.Model, UserMixin):
         return check_password_hash(self.password_hash, password)
 
     def role(self):
-        role = Role.query.get(self.role_id)
-        if role:
+        if self.role_id:
+            role = Role.query.get(self.role_id)
             return role
         else:
             return None
