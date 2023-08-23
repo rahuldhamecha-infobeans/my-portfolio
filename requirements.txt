@@ -10,9 +10,9 @@ Flask-WTF==1.1.1
 greenlet==2.0.2
 idna==3.4
 itsdangerous==2.1.2
-Jinja2 @ file:///work/ci_py311/jinja2_1676823587943/work
+Jinja2
 Mako==1.2.4
-MarkupSafe @ file:///work/ci_py311/markupsafe_1676823507015/work
+MarkupSafe
 SQLAlchemy==2.0.20
 typing_extensions==4.7.1
 Werkzeug==2.3.7
