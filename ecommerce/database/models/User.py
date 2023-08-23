@@ -22,7 +22,7 @@ class User(db.Model, UserMixin):
 
 
     def __str__(self):
-        return self.id
+        return str(self.username)
 
     def __init__(self, email, username, password,full_name=None,role_id=None):
         self.email = email

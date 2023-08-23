@@ -13,3 +13,4 @@ app.config['SECRET_KEY'] = 'ecommerce_secret_key'
 
 
 import ecommerce.register_application
+import ecommerce.context_processor

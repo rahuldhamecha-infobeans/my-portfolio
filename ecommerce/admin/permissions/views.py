@@ -4,16 +4,19 @@ from flask import Blueprint,render_template,flash,redirect,url_for,abort
 from flask_login import login_required
 from ecommerce.database.models.Permission import Permission
 from ecommerce.admin.permissions.forms import PermissionForm
+from ecommerce.admin.decorators import has_permission
 
 permissions_blueprint = Blueprint('permissions',__name__)
 @permissions_blueprint.route('/')
 @login_required
+@has_permission('Permissions')
 def index():
 	permissions = Permission.query.all()
 	return render_template('admin/permissions/index.html',permissions=permissions)
 
 @permissions_blueprint.route('/create',methods=['GET','POST'])
 @login_required
+@has_permission('Permissions Create')
 def create():
 	form = PermissionForm()
 	if form.validate_on_submit():
@@ -29,6 +32,7 @@ def create():
 
 @permissions_blueprint.route('/update/<int:id>',methods=['GET','POST'])
 @login_required
+@has_permission('Permissions Update')
 def update(id):
 	permission = Permission.query.get(id)
 	form = PermissionForm(permission_id=id)
@@ -45,6 +49,7 @@ def update(id):
 
 @permissions_blueprint.route('/delete/<int:id>',methods=['GET'])
 @login_required
+@has_permission('Permissions Delete')
 def delete(id):
 	permission = Permission.query.get(id)
 	if permission:

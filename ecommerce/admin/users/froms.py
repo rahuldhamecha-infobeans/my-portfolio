@@ -3,6 +3,7 @@ from wtforms import StringField,PasswordField,SubmitField,SelectField,HiddenFiel
 from wtforms.validators import DataRequired,Email,EqualTo
 from wtforms import ValidationError
 from ecommerce.database.models.User import User
+from ecommerce.database.models.Role import Role
 
 class UserForm(FlaskForm):
     user_id = HiddenField('User Id')
@@ -10,7 +11,7 @@ class UserForm(FlaskForm):
     email = StringField('Email',validators=[DataRequired(),Email()])
     username = StringField('Username',validators=[DataRequired()])
     password = PasswordField('Password')
-    roles = SelectField('Role',choices=[None,1,2,3,4])
+    roles = SelectField('Role')
     submit = SubmitField('Submit')
 
     def validate_password(self,password):

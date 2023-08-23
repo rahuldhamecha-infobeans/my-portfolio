@@ -9,9 +9,8 @@ class Role(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), unique=True, index=True)
 
-    @property
     def __str__(self):
-        return self.name
+        return str(self.name)
 
     def __init__(self, name):
         self.name = name

@@ -12,7 +12,9 @@
         <div class="card-header d-flex justify-content-between align-items-center">
           <h5 class="mb-0">User Listing</h5>
           <small class="text-muted float-end">
-              <a href="{{ url_for('roles.create') }}" class="btn btn-outline-primary">Create User</a>
+              {% if user_has_permission('Users Create') %}
+                <a href="{{ url_for('users.create') }}" class="btn btn-outline-primary">Create User</a>
+              {% endif %}
           </small>
         </div>
         <div class="card-body">
@@ -37,8 +39,15 @@
                         <td>{{ user.email or None }}</td>
                         <td>{{ user.role_name() }}</td>
                         <td>
+                          {% if user_has_permission('Users Update') %}
                           <a href="{{ url_for('users.update',id=user.id) }}" class="btn btn-outline-primary"><i class="bx bx-edit-alt me-1"></i></a>
+                           {% endif %}
+
+                        {% if user_has_permission('Users Delete') %}
+                            {% if current_user.id != user.id %}
                           <a href="{{ url_for('users.delete',id=user.id) }}" class="btn btn-outline-danger"><i class="bx bx-trash me-1"></i></a>
+                            {% endif %}
+                        {% endif %}
                         </td>
                       </tr>
                     {% endfor %}

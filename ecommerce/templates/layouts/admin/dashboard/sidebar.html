@@ -1,6 +1,6 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
   <div class="app-brand demo" style="display: flex;justify-content: center;align-items: center;">
-    <a href="index.html" class="app-brand-link">
+    <a href="{{ url_for('dashboard.index') }}" class="app-brand-link">
       <span class="app-brand-logo demo">
         <img style="max-width: 150px;" src="{{ url_for('static',filename="public/images/company_logo.jpg") }}" alt="">
       </span>
@@ -15,34 +15,57 @@
 
   <ul class="menu-inner py-1">
     <!-- Dashboard -->
+    {% if user_has_permission('Dashboard') %}
     <li class="menu-item {% if request.endpoint == 'dashboard.index' %}active{% endif %}">
       <a href="{{ url_for('dashboard.index') }}" class="menu-link">
         <i class="menu-icon tf-icons bx bx-home-circle"></i>
         <div data-i18n="Analytics">Dashboard</div>
       </a>
     </li>
+    {% endif %}
+
 
     <!-- Layouts -->
     <li class="menu-header small text-uppercase">
       <span class="menu-header-text">Users</span>
     </li>
-    <li class="menu-item {% if request.endpoint == 'users.index' %}active{% endif %}">
+    {% if user_has_permission('Users') %}
+    <li class="menu-item {% if request.endpoint in ['users.index','users.create','users.update','users.delete']  %}active{% endif %}">
       <a href="{{ url_for('users.index') }}" class="menu-link">
         <i class="menu-icon tf-icons bx bx-user-circle"></i>
         <div data-i18n="Basic">Users</div>
       </a>
     </li>
-      <li class="menu-item {% if request.endpoint == 'roles.index' %}active{% endif %}">
+    {% endif %}
+
+    {% if user_has_permission('Roles') %}
+      <li class="menu-item {% if request.endpoint in ['roles.index','roles.create','roles.update','roles.delete','roles.permissions'] %}active{% endif %}">
       <a href="{{ url_for('roles.index') }}" class="menu-link">
         <i class="menu-icon tf-icons bx bx-lock-alt"></i>
         <div data-i18n="Basic">Roles</div>
       </a>
     </li>
-      <li class="menu-item {% if request.endpoint == 'permissions.index' %}active{% endif %}">
+  {% endif %}
+
+  {% if user_has_permission('Permissions') %}
+    <li class="menu-item {% if request.endpoint in ['permissions.index','permissions.create','permissions.update','permissions.delete'] %}active{% endif %}">
       <a href="{{ url_for('permissions.index') }}" class="menu-link">
         <i class="menu-icon tf-icons bx bx-lock-alt"></i>
         <div data-i18n="Basic">Permissions</div>
       </a>
     </li>
+  {% endif %}
+   <!-- Layouts -->
+    <li class="menu-header small text-uppercase">
+      <span class="menu-header-text">E-Commerce</span>
+    </li>
+  {% if user_has_permission('Products') %}
+    <li class="menu-item {% if request.endpoint in ['products.index','products.create','products.update','products.delete'] %}active{% endif %}">
+      <a href="{{ url_for('products.index') }}" class="menu-link">
+        <i class="menu-icon tf-icons bx bxl-product-hunt"></i>
+        <div data-i18n="Basic">Products</div>
+      </a>
+    </li>
+  {% endif %}
   </ul>
 </aside>
