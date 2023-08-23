@@ -15,5 +15,5 @@ Mako==1.2.4
 MarkupSafe
 SQLAlchemy==2.0.20
 typing_extensions==4.7.1
-Werkzeug==2.3.7
+Werkzeug
 WTForms==3.0.1
