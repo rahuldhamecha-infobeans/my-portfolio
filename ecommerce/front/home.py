@@ -1,5 +1,6 @@
 from ecommerce import app
 from flask import Blueprint, render_template
+from flask_login import login_required
 
 public_blueprint = Blueprint('front',__name__)
 

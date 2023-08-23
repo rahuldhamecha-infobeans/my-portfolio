@@ -3,3 +3,28 @@
 {% block page_title %} Products {% endblock %}
 
 {% block page_body_title %} Products {% endblock %}
+
+{% block body_block %}
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card">
+                <div class="card-body">
+                    <form action="{{ url_for('products.product_payment') }}" method="post">
+{#                        <script#}
+{#                                src="https://checkout.stripe.com/checkout.js"#}
+{#                                class="stripe-button"#}
+{#                                data-key="{{ public_key }}"#}
+{#                                data-amount="1300"#}
+{#                                data-name="Product Name"#}
+{#                                data-description="Product Description"#}
+{#                                data-locale="auto"#}
+{#                                data-image="{{ url_for('static',filename='public/images/company_logo.jpg') }}"#}
+{#                                data-zip-code="true"#}
+{#                        >#}
+{#                        </script>#}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
