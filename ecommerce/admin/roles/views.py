@@ -13,7 +13,7 @@ roles_blueprint = Blueprint('roles',__name__)
 @login_required
 @has_permission('Roles')
 def index():
-	roles = Role.query.all()
+	roles = Role.query.order_by('id').all()
 	return render_template('admin/roles/index.html',**locals())
 
 

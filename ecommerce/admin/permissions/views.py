@@ -3,6 +3,7 @@ from ecommerce.database import db
 from flask import Blueprint,render_template,flash,redirect,url_for,abort
 from flask_login import login_required
 from ecommerce.database.models.Permission import Permission
+from ecommerce.database.models.RolesPermission import RolesPermission
 from ecommerce.admin.permissions.forms import PermissionForm
 from ecommerce.admin.decorators import has_permission
 
@@ -11,7 +12,7 @@ permissions_blueprint = Blueprint('permissions',__name__)
 @login_required
 @has_permission('Permissions')
 def index():
-	permissions = Permission.query.all()
+	permissions = Permission.query.order_by('id').all()
 	return render_template('admin/permissions/index.html',permissions=permissions)
 
 @permissions_blueprint.route('/create',methods=['GET','POST'])
@@ -52,7 +53,13 @@ def update(id):
 @has_permission('Permissions Delete')
 def delete(id):
 	permission = Permission.query.get(id)
+	all_maped_permission = RolesPermission.query.filter_by(permission_id=id)
 	if permission:
+		if all_maped_permission:
+			for mapped in all_maped_permission:
+				db.session.delete(mapped)
+				db.session.commit()
+
 		db.session.delete(permission)
 		db.session.commit()
 		flash('Permission Successfully Deleted.','success')

@@ -45,7 +45,7 @@
 
                         {% if user_has_permission('Users Delete') %}
                             {% if current_user.id != user.id %}
-                          <a href="{{ url_for('users.delete',id=user.id) }}" class="btn btn-outline-danger"><i class="bx bx-trash me-1"></i></a>
+                                <a href="{{ url_for('users.delete',id=user.id) }}" class="btn btn-outline-danger"><i class="bx bx-trash me-1"></i></a>
                             {% endif %}
                         {% endif %}
                         </td>

@@ -2,10 +2,11 @@ import os
 from ecommerce import app
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+import pymysql
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(BASE_DIR, 'data.sqlite')
+app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:Rahul21896@localhost/flask"
 app.config['SQLALCHEMY_TRACK_MODIFICATION'] = False
 
 

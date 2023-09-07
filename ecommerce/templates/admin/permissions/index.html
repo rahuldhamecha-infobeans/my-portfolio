@@ -32,8 +32,12 @@
                             <td>{{ permission.id }}</td>
                             <td>{{ permission.name }}</td>
                             <td>
-                              <a href="{{ url_for('permissions.update',id=permission.id) }}" class="btn btn-outline-primary"><i class="bx bx-edit-alt me-1"></i></a>
-                              <a href="{{ url_for('permissions.delete',id=permission.id) }}" class="btn btn-outline-danger"><i class="bx bx-trash me-1"></i></a>
+                               {% if user_has_permission('Permissions Create') %}
+                                   <a href="{{ url_for('permissions.update',id=permission.id) }}" class="btn btn-outline-primary"><i class="bx bx-edit-alt me-1"></i></a>
+                                {% endif %}
+                                {% if user_has_permission('Permissions Delete') %}
+                                    <a href="{{ url_for('permissions.delete',id=permission.id) }}" class="btn btn-outline-danger"><i class="bx bx-trash me-1"></i></a>
+                                {% endif %}
                             </td>
                           </tr>
                         {% endfor %}
@@ -50,6 +54,5 @@
         </div>
       </div>
     </div>
-
   </div>
 {% endblock %}
